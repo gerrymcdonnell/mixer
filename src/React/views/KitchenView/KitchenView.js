@@ -30,6 +30,16 @@ class KitchenView extends Component {
         this.onSelectionChange()
     }
 
+    //uncheck
+    handleUnCheckAll(event) {
+        event.preventDefault()
+
+        Array.from(this.form.getElementsByTagName('input')).forEach((input) => { if (input.checked) input.click() })
+
+        this.onSelectionChange()
+    }
+
+
     onSelectionChange() {
         const { dispatch } = this.props
 
@@ -45,7 +55,9 @@ class KitchenView extends Component {
 
         return <form action="" ref={(form) => { this.form = form }}>
             <a href="" className="btn btn-default btn-sm pull-right" onClick={this.handleCheckAll}>Check All</a>
-            <h3>Kitchen</h3>
+
+            <a href="" className="btn btn-default btn-sm pull-right" onClick={this.handleUnCheckAll}>UnCheck All</a>
+
             <p>We've found the following tables in your database. Here you can generate skeleton application code for them.</p>
             <FetchData namespace="tables" query="tables.json">
                 <TablesList onSelectionChange={this.onSelectionChange} />
